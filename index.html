@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flower Bloom with Branch and Leaves</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: relative;
+      width: 200px;
+      height: 400px;
+    }
+
+    .branch {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 20px;
+      height: 200px;
+      background-color: #8b4513;
+      transform: translateX(-50%) scaleY(0);
+      border-radius: 10px;
+      opacity: 0;
+    }
+
+    .leaf {
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      background-color: #32a852;
+      border-radius: 20px 50px 50px 20px;
+      transform-origin: center;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .leaf.left {
+      left: 30%;
+      bottom: 120px;
+      transform: rotate(-30deg) scale(0);
+    }
+
+    .leaf.right {
+      right: 30%;
+      bottom: 80px;
+      transform: rotate(30deg) scale(0);
+    }
+
+    .flower {
+      position: absolute;
+      bottom: 190px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 200px;
+    }
+
+    .petal {
+      position: absolute;
+      width: 50px;
+      height: 100px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+      transform-origin: bottom center;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .center {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: #ffd700;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="branch"></div>
+    <div class="leaf left"></div>
+    <div class="leaf right"></div>
+    <div class="flower">
+      <div class="petal" style="transform: rotate(0deg);"></div>
+      <div class="petal" style="transform: rotate(45deg);"></div>
+      <div class="petal" style="transform: rotate(90deg);"></div>
+      <div class="petal" style="transform: rotate(135deg);"></div>
+      <div class="petal" style="transform: rotate(180deg);"></div>
+      <div class="petal" style="transform: rotate(225deg);"></div>
+      <div class="petal" style="transform: rotate(270deg);"></div>
+      <div class="petal" style="transform: rotate(315deg);"></div>
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const branch = document.querySelector('.branch');
+      const petals = document.querySelectorAll('.petal');
+      const center = document.querySelector('.center');
+      const leaves = document.querySelectorAll('.leaf');
+
+      // Animate the branch growing
+      gsap.to(branch, {
+        scaleY: 1,
+        opacity: 1,
+        duration: 1.5,
+        ease: "power2.out",
+      });
+
+      // Animate leaves appearing after the branch grows
+      gsap.to(leaves, {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.3,
+        delay: 1.2,
+        ease: "power2.out",
+      });
+
+      // Animate petals blooming after branch and leaves
+      gsap.to(petals, {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out",
+        delay: 2,
+      });
+
+      // Animate flower center appearing after petals
+      gsap.to(center, {
+        scale: 1,
+        opacity: 1,
+        duration: 1,
+        delay: 3.5,
+        ease: "elastic.out(1, 0.3)",
+      });
+    };
+  </script>
+</body>
+</html>
